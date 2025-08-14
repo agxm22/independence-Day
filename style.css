@@ -1,0 +1,126 @@
+:root{
+  --bg1:#0b1020;
+  --bg2:#111a33;
+  --glow:#2a3f7a;
+  --saffron:#FF9933;
+  --white:#FFFFFF;
+  --green:#138808;
+  --blue:#0a3d91;
+}
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:#e7ecff;
+  background:
+    radial-gradient(1200px 800px at 70% 20%, var(--glow) 0%, transparent 60%),
+    radial-gradient(1000px 600px at 20% 80%, #1a2a52 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg1), var(--bg2));
+  overflow-x:hidden;
+}
+
+.wrap{
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding:clamp(16px, 2.8vw, 40px);
+}
+
+.card{
+  width:min(920px, 92vw);
+  border-radius:30px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 10px 40px rgba(0,0,0,.45), inset 0 0 80px rgba(255,255,255,.04);
+  padding:clamp(16px, 3vw, 32px);
+  position:relative;
+  overflow:hidden;
+  backdrop-filter: blur(6px);
+}
+
+/* subtle border glow */
+.card::before{
+  content:""; position:absolute; inset:-2px; border-radius:26px; padding:2px;
+  background: conic-gradient(from 180deg at 50% 50%,
+    rgba(255,153,51,.7), rgba(255,255,255,.6), rgba(19,136,8,.7),
+    rgba(10,61,145,.7), rgba(255,153,51,.7));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none;
+}
+
+header{ text-align:center; margin-bottom:clamp(16px, 2.5vw, 24px); }
+header h1{
+  margin:0; font-weight:800; letter-spacing:.5px;
+  font-size:clamp(22px, 4.8vw, 38px); text-transform:uppercase;
+}
+header p{ opacity:.8; margin:.5rem 0 0; font-size:clamp(12px, 2.4vw, 14px) }
+
+/* Stage */
+.stage{
+  position:relative; aspect-ratio:16/9; width:100%;
+  border-radius:18px; overflow:hidden;
+  background:linear-gradient(180deg, #0c142b, #0a1226);
+  box-shadow: inset 0 0 60px rgba(0,0,0,.5);
+}
+
+/* Tricolor stripes */
+.stripe{ position:absolute; left:0; width:100%; height:33.333%; transform:translateX(-110%); }
+.stripe.top{ top:0; background:var(--saffron); }
+.stripe.mid{ top:33.333%; background:var(--white); }
+.stripe.bot{ top:66.666%; background:var(--green); }
+
+/* Chakra */
+.chakra{
+  position:absolute; left:50%; top:50%;
+  width:min(40vmin, 220px);
+  transform:translate(-50%,-50%) scale(.7);
+  opacity:0;
+}
+
+/* Greeting */
+.greet{
+  position:absolute; inset:auto 0 8% 0; text-align:center;
+  font-size:clamp(18px, 4.5vw, 40px);
+  font-weight:900; letter-spacing:1px; text-transform:uppercase;
+  color:#fff; filter: drop-shadow(0 3px 10px rgba(0,0,0,.5));
+  opacity:0; transform: translateY(12px);
+}
+.greet .tri{ display:inline-block; padding:.12em .28em; border-radius:10px; }
+.greet .saff{ background:rgba(255,153,51,.25) }
+.greet .whit{ background:rgba(255,255,255,.18); color:#0b1020 }
+.greet .gren{ background:rgba(19,136,8,.22) }
+
+/* Buttons */
+.actions{ display:flex; gap:12px; justify-content:center; margin-top:clamp(14px, 2vw, 18px); }
+.btn{
+  cursor:pointer; padding:.8rem 1.1rem; border-radius:999px; font-weight:700;
+  border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.06);
+  color:#fff; backdrop-filter: blur(4px); transition:transform .15s ease, box-shadow .2s ease;
+}
+.btn:hover{ transform: translateY(-1px); box-shadow:0 8px 20px rgba(0,0,0,.35); }
+
+/* Confetti Canvas */
+#confetti{ position:absolute; inset:0; pointer-events:none; }
+
+/* Animations (triggered when .stage has .play) */
+.stage.play .stripe.top{ animation: slideIn .8s .1s ease-out forwards; }
+.stage.play .stripe.mid{ animation: slideIn .8s .55s ease-out forwards; }
+.stage.play .stripe.bot{ animation: slideIn .8s 1s ease-out forwards; }
+.stage.play .chakra{ animation: reveal .4s 1.5s ease-out forwards, spin 10s 2s linear infinite; }
+.stage.play .greet{ animation: popIn .6s 1.8s cubic-bezier(.2,.7,.2,1) forwards, glow 3s 2.6s ease-in-out infinite alternate; }
+
+@keyframes slideIn{ from{ transform:translateX(-110%)} to{ transform:translateX(0)} }
+@keyframes reveal{ from{ opacity:0; transform:translate(-50%,-50%) scale(.7)} to{ opacity:1; transform:translate(-50%,-50%) scale(1)} }
+@keyframes popIn{ from{ opacity:0; transform:translateY(12px)} to{ opacity:1; transform:translateY(0)} }
+@keyframes spin{ to{ transform:translate(-50%,-50%) rotate(360deg) } }
+@keyframes glow{ from{ text-shadow:0 0 0 rgba(255,255,255,.4)} to{ text-shadow:0 0 18px rgba(255,255,255,.65)} }
+
+footer{ text-align:center; opacity:.7; margin-top:12px; font-size:.9rem }
+footer a{ color:#c9d6ff; text-decoration:none }
+
+@media (max-width:520px){
+  .card{ padding:16px }
+  .chakra{ width:min(55vmin, 200px) }
+}
