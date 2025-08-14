@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Independence Day 🇮🇳</title>
+  <meta name="description" content="Animated Indian Flag with a festive greeting for Independence Day. School project." />
+  <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1>Happy Independence Day 🇮🇳</h1>
+        <p>15 August • India</p>
+      </header>
+
+      <div class="stage" id="stage">
+        <!-- Tricolor stripes -->
+        <div class="stripe top"></div>
+        <div class="stripe mid"></div>
+        <div class="stripe bot"></div>
+
+        <!-- Ashoka Chakra (SVG; spokes added by JS) -->
+        <svg id="chakra" class="chakra" viewBox="0 0 200 200" aria-label="Ashoka Chakra">
+          <!-- Outer circle -->
+          <circle cx="100" cy="100" r="72" fill="none" stroke="#0a3d91" stroke-width="6" />
+          <!-- Inner hub -->
+          <circle cx="100" cy="100" r="8" fill="#0a3d91" />
+          <!-- Spokes container (JS will add 24 lines) -->
+          <g class="spokes"></g>
+        </svg>
+
+        <!-- Confetti canvas -->
+        <canvas id="confetti" aria-hidden="true"></canvas>
+
+        <!-- Greeting -->
+        <div class="greet" id="greet">
+          <span class="tri saff">Happy</span>
+          <span class="tri whit">Independence</span>
+          <span class="tri gren">Day</span>
+          <span>🇮🇳</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="replayBtn">Replay Animation</button>
+        <button class="btn" id="confettiBtn">Celebrate 🎉</button>
+      </div>
+
+      <footer>
+        <small>Made by Agam.</small>
+      </footer>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
